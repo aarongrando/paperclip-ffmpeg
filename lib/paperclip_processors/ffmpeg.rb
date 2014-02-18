@@ -177,6 +177,7 @@ module Paperclip
           drawtext_directive += ":x=" + drawtext[:x].to_s
           drawtext_directive += ":y=" + drawtext[:y].to_s
         end 
+        drawtext_directive += '"'
         parameters << drawtext_directive
       end
       
