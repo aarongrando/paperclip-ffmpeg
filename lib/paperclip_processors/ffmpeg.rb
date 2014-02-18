@@ -23,6 +23,7 @@ module Paperclip
       end
       
       @geometry        = options[:geometry]
+      @drawtext        = options[:drawtext] 
       @file            = file
       @keep_aspect     = !@geometry.nil? && @geometry[-1,1] != '!'
       @pad_only        = @keep_aspect    && @geometry[-1,1] == '#'
@@ -37,6 +38,7 @@ module Paperclip
       @pad_color       = options[:pad_color].nil? ? "black" : options[:pad_color]
       @auto_rotate     = options[:auto_rotate].nil? ? false : options[:auto_rotate]
       attachment.instance_write(:meta, @meta)
+      
     end
     # Performs the transcoding of the +file+ into a thumbnail/video. Returns the Tempfile
     # that contains the new image/video.
@@ -156,11 +158,30 @@ module Paperclip
         @convert_options[:output][:strict] = 'experimental'
       end
 
-      Ffmpeg.log("Adding Source") if @whiny
-      # Add source
+      Ffmpeg.log("Adding input") if @whiny
+      # Add input
       # Validations on the values. These could be either nil.
       parameters << @convert_options[:input].map { |k,v| "-#{k.to_s} #{v} " if !v.nil? && (v.is_a?(Numeric) || !v.empty?) }
       parameters << "-i :source"
+      
+      if @drawtext.present?
+        Ffmpeg.log("Adding Drawtext") if @whiny
+        # Add drawtext
+        drawtext_directive = ' -vf "[in]'
+        @drawtext.each_with_index do |drawtext, index|
+          drawtext_directive += ', ' if (index > 0)                   # Allow for multiple drawtext calls
+          drawtext_directive += 'drawtext='
+          drawtext_directive += "fontfile='" + drawtext[:font] + "'"  # Must be .ttf font
+          drawtext_directive += ":text='" + drawtext[:font] + "'"     # Be aware to escape single quotes
+          drawtext_directive += ":draw='if(gt(n," + drawtext[:start_frame] + ")),lt(n," + drawtext[:end_frame] + "))'"
+          drawtext_directive += ":x=" + drawtext[:x]
+          drawtext_directive += ":y=" + drawtext[:y]
+        end 
+        parameters << drawtext_directive
+      end
+      
+      Ffmpeg.log("Adding output") if @whiny
+      # Add output
       parameters << @convert_options[:output].map { |k,v| "-#{k.to_s} #{v} " if !v.nil? && (v.is_a?(Numeric) || !v.empty?) }
       parameters << "-y :dest"
 
@@ -168,6 +189,7 @@ module Paperclip
       parameters = parameters.flatten.compact.join(" ").strip.squeeze(" ")
 
       Ffmpeg.log(parameters)
+      
       begin
         success = Paperclip.run("ffmpeg", parameters, :source => "#{File.expand_path(src.path)}", :dest => File.expand_path(dst.path))
       rescue Cocaine::ExitStatusError => e
