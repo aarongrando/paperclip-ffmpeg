@@ -169,7 +169,7 @@ module Paperclip
         # Add drawtext
         drawtext_directive = ' -vf "[in]'
         @drawtext.each_with_index do |drawtext, index|
-          drawtext_directive += ', ' if (index > 0)                   # Allow for multiple drawtext calls
+          drawtext_directive += ', ' if (index > 0)                   # Account for multiple drawtext calls
           drawtext_directive += 'drawtext='
           drawtext_directive += "fontfile='" + drawtext[:font] + "'"  # Must be .ttf font
           drawtext_directive += ":text='" + drawtext[:font] + "'"     # Be aware to escape single quotes
