@@ -3,11 +3,11 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "paperclip-ffmpeg"
-  s.version     = '1.0.2'
+  s.version     = '1.0.3'
   s.platform    = Gem::Platform::RUBY
   s.licenses    = 'MIT'
-  s.authors     = ["Omar Abdel-Wahab"]
-  s.email       = ["owahab@gmail.com"]
+  s.authors     = ["Omar Abdel-Wahab", "Aaron Grandp"]
+  s.email       = ["owahab@gmail.com", "aaron.grando@gmail.com"]
   s.homepage    = "http://github.com/owahab/paperclip-ffmpeg"
   s.summary     = %q{Process your attachments with FFMPEG}
   s.description = %q{Process your attachments with FFMPEG}

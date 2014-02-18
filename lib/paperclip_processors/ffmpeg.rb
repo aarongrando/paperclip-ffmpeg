@@ -173,9 +173,9 @@ module Paperclip
           drawtext_directive += 'drawtext='
           drawtext_directive += "fontfile='" + drawtext[:font] + "'"  # Must be .ttf font
           drawtext_directive += ":text='" + drawtext[:font] + "'"     # Be aware to escape single quotes
-          drawtext_directive += ":draw='if(gt(n," + drawtext[:start_frame] + ")),lt(n," + drawtext[:end_frame] + "))'"
-          drawtext_directive += ":x=" + drawtext[:x]
-          drawtext_directive += ":y=" + drawtext[:y]
+          drawtext_directive += ":draw='if(gt(n," + drawtext[:start_frame].to_s + ")),lt(n," + drawtext[:end_frame].to_s + "))'"
+          drawtext_directive += ":x=" + drawtext[:x].to_s
+          drawtext_directive += ":y=" + drawtext[:y].to_s
         end 
         parameters << drawtext_directive
       end
