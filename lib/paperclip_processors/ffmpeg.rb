@@ -173,8 +173,8 @@ module Paperclip
           drawtext_directive += 'drawtext='
           drawtext_directive += "text='" + drawtext[:text] + "'" # Be aware to escape single quotes
           drawtext_directive += ":fontfile='" + drawtext[:font] + "'" if drawtext[:font].present?  # Must be .ttf font 
-          drawtext_directive += ":fontcolor='" + drawtext[:fontcolor] + "'" if drawtext[:color].present?  # Must be .ttf font 
-          drawtext_directive += ":fontsize='" + drawtext[:fontsize] + "'" if drawtext[:size].present?  # Must be .ttf font 
+          drawtext_directive += ":fontcolor='" + drawtext[:fontcolor] + "'" if drawtext[:fontcolor].present?  # Format "0x" + "[HEXCOLOR]" - ex. '0xFFAA22'. Default is black.
+          drawtext_directive += ":fontsize='" + drawtext[:fontsize] + "'" if drawtext[:fontsize].present?  # In px height. Default is 16.
           drawtext_directive += ":draw='if(gt(n," + drawtext[:start_frame].to_s + "),lt(n," + drawtext[:end_frame].to_s + "))'"
           drawtext_directive += ":x=" + drawtext[:x].to_s
           drawtext_directive += ":y=" + drawtext[:y].to_s
