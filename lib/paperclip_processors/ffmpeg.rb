@@ -171,8 +171,10 @@ module Paperclip
         @drawtext.each_with_index do |drawtext, index|
           drawtext_directive += ', ' if (index > 0)                   # Account for multiple drawtext calls
           drawtext_directive += 'drawtext='
-          drawtext_directive += "fontfile='" + drawtext[:font] + "'"  # Must be .ttf font
-          drawtext_directive += ":text='" + drawtext[:font] + "'"     # Be aware to escape single quotes
+          drawtext_directive += "text='" + drawtext[:text] + "'" # Be aware to escape single quotes
+          drawtext_directive += ":fontfile='" + drawtext[:font] + "'" if drawtext[:font].present?  # Must be .ttf font 
+          drawtext_directive += ":fontcolor='" + drawtext[:fontcolor] + "'" if drawtext[:color].present?  # Must be .ttf font 
+          drawtext_directive += ":fontsize='" + drawtext[:fontsize] + "'" if drawtext[:size].present?  # Must be .ttf font 
           drawtext_directive += ":draw='if(gt(n," + drawtext[:start_frame].to_s + "),lt(n," + drawtext[:end_frame].to_s + "))'"
           drawtext_directive += ":x=" + drawtext[:x].to_s
           drawtext_directive += ":y=" + drawtext[:y].to_s
