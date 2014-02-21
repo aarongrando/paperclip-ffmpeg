@@ -154,8 +154,14 @@ module Paperclip
         @convert_options[:output][:vcodec] = 'libtheora'
         @convert_options[:output][:f] = 'ogg'
       when 'mp4'
-        @convert_options[:output][:acodec] = 'aac'
-        @convert_options[:output][:strict] = 'experimental'
+        @convert_options[:output][:acodec] = 'libfaac'
+        @convert_options[:output][:vcodec] = 'libx264'
+        @convert_options[:output][:vpre] = 'ipod640'   
+        @convert_options[:output][:b] = '250k'     
+        @convert_options[:output][:bt] = '50k'   
+        @convert_options[:output][:ab] = '56k'   
+        @convert_options[:output][:ac] = '2'  
+        # @convert_options[:output][:strict] = 'experimental'
       end
 
       Ffmpeg.log("Adding input") if @whiny
@@ -163,6 +169,7 @@ module Paperclip
       # Validations on the values. These could be either nil.
       parameters << @convert_options[:input].map { |k,v| "-#{k.to_s} #{v} " if !v.nil? && (v.is_a?(Numeric) || !v.empty?) }
       parameters << "-i :source"
+      
       
       if @drawtext.present?
         Ffmpeg.log("Adding Drawtext") if @whiny
