@@ -157,9 +157,9 @@ module Paperclip
         @convert_options[:output][:acodec] = 'libfaac'
         @convert_options[:output][:vcodec] = 'libx264'
         @convert_options[:output][:vpre] = 'ipod640'   
-        @convert_options[:output][:b] = '250k'     
-        @convert_options[:output][:bt] = '50k'   
-        @convert_options[:output][:ab] = '56k'   
+        @convert_options[:output][:b] = '512k'     
+        @convert_options[:output][:bt] = '56k'   
+        @convert_options[:output][:ab] = '128k'   
         @convert_options[:output][:ac] = '2'  
         # @convert_options[:output][:strict] = 'experimental'
       end
