@@ -156,11 +156,11 @@ module Paperclip
       when 'mp4'
         @convert_options[:output][:acodec] = 'libfaac'
         @convert_options[:output][:vcodec] = 'libx264'
-        @convert_options[:output][:vpre] = 'ipod640'   
+        @convert_options[:output][:vprofile] = 'baseline'
+        @convert_options[:output][:level] = '30'
+        @convert_options[:output][:maxrate] = '10000000'
+        @convert_options[:output][:bufsize] = '10000000'
         @convert_options[:output][:b] = '800k'     
-        # @convert_options[:output][:ab] = '512k'   
-        # @convert_options[:output][:ac] = '2'  
-        # @convert_options[:output][:strict] = 'experimental'
       end
 
       Ffmpeg.log("Adding input") if @whiny
