@@ -154,7 +154,7 @@ module Paperclip
         @convert_options[:output][:vcodec] = 'libtheora'
         @convert_options[:output][:f] = 'ogg'
       when 'mp4'
-        @convert_options[:output][:acodec] = 'libfaac'
+        @convert_options[:output][:acodec] = 'libvo_aacenc'
         @convert_options[:output][:vcodec] = 'libx264'
         @convert_options[:output][:vprofile] = 'baseline'
         @convert_options[:output][:level] = '30'
