@@ -161,8 +161,7 @@ module Paperclip
         @convert_options[:output][:maxrate] = '10000000'
         @convert_options[:output][:bufsize] = '10000000'
         @convert_options[:output][:b] = '800k'   
-        @convert_options[:output][:strict] = ''  
-        @convert_options[:output][:2] = ''  
+        @convert_options[:output][:strict] = ' -2'
       end
 
       Ffmpeg.log("Adding input") if @whiny
