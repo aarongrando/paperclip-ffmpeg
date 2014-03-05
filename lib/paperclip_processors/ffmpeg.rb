@@ -158,8 +158,8 @@ module Paperclip
         @convert_options[:output][:vcodec] = 'libx264'
         @convert_options[:output][:vprofile] = 'baseline'
         @convert_options[:output][:level] = '30'
-        @convert_options[:output][:maxrate] = '10000000'
-        @convert_options[:output][:bufsize] = '10000000'
+        @convert_options[:output][:maxrate] = '9000000'
+        @convert_options[:output][:bufsize] = '9000000'
         @convert_options[:output][:b] = '800k'   
         @convert_options[:output][:strict] = ' -2'
       end
